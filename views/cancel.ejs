@@ -1,0 +1,66 @@
+<h1>Your payment has been cancelled!</h1><!-- views/cancel.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Canceled</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      padding: 20px;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #f44336; /* Red color for cancel */
+    }
+    .message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-button a {
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .back-button a:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Payment Canceled</h1>
+
+  <div class="message">
+    <p>We're sorry to hear that you canceled the payment.</p>
+    <p>Your payment was not processed.</p>
+  </div>
+
+  <div class="back-button">
+    <a href="/cart">Go Back to Payment Page</a>
+  </div>
+</div>
+
+</body>
+</html>

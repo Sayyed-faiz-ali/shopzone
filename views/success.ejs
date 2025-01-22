@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Receipt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-100 text-gray-800 p-5">
+
+<div class="bg-white rounded-lg shadow-md p-6 max-w-3xl mx-auto">
+  <p>Shop Zone</p>
+  <h1 class="text-center text-2xl font-semibold text-green-600">Payment Receipt</h1>
+
+  <div class="mt-5">
+    <p><span class="font-bold">Payment ID:</span> <%= payment.id %></p>
+    <p><span class="font-bold">Status:</span> <%= payment.state %></p>
+    <p><span class="font-bold">Amount:</span> $<%= payment.transactions[0].amount.total %> <%= payment.transactions[0].amount.currency %></p>
+    <p><span class="font-bold">Description:</span> <%= payment.transactions[0].description %></p>
+
+    <h3 class="mt-4 font-semibold text-lg">Payer Information:</h3>
+    <p><span class="font-bold">Name:</span> <%= payment.payer.payer_info.first_name %> <%= payment.payer.payer_info.last_name %></p>
+    <p><span class="font-bold">Email:</span> <%= payment.payer.payer_info.email %></p>
+
+    <h3 class="mt-4 font-semibold text-lg">Item List:</h3>
+    <div class="pl-5 mt-2">
+      <% payment.transactions[0].item_list.items.forEach(function(item) { %>
+        <p><span class="font-bold">Item Name:</span> <%= item.name %></p>
+        <p><span class="font-bold">Quantity:</span> <%= item.quantity %></p>
+        <p><span class="font-bold">Price:</span> $<%= item.price %> <%= payment.transactions[0].amount.currency %></p>
+        <hr class="my-3">
+      <% }); %>
+    </div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <a href="/user/home" class="inline-block px-6 py-2 text-white bg-green-600 rounded-md text-lg hover:bg-green-700">Back to Payment Page</a>
+  </div>
+</div>
+
+</body>
+</html>

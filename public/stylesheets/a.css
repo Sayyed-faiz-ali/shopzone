@@ -1,0 +1,58 @@
+.x:hover{
+transform: scale(1.1);
+animation: 2s ease-in;
+overflow: hidden;
+color: black;
+border-radius: 12px 12px  12px 12px;
+}
+.a{
+    animation: x 2s infinite ease-in-out ;
+}
+@keyframes x {
+    0%{
+       color: aqua;
+    }
+    30%{
+      transform: scale(2);
+        color: rgb(246, 20, 20);
+    }
+    70%{
+        color: aliceblue;
+    }
+    100%{
+        color: purple;
+    }
+    
+}
+.p:hover{
+    border-radius: 20%;
+    transition: all 1s ease-in-out;
+    background-color: red;
+    font-size: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.ca:hover{
+    transform: scale(1.2);
+    transition:all 1s ease-in-out;
+   
+
+}
+/* .box:hover{
+    transform: scale(1.2);
+   
+    transition: all 1s ease-in-out;
+
+} */
+
+/* #as:hover{
+    width: 400px;
+    height: 300px;
+    transition: all 1s ease-in-out;
+/* }  /* */
+.try:hover{
+    
+        transform: rotate(23deg);
+       
+transition: all 1s ease-in;
+}

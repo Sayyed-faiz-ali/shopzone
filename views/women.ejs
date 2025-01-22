@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <%-include('nav')%>
+    <h1 class="text-2xl flex justify-center items-center w-full   font-semibold  h-10  border-size-800 mt-10">Women</h1>
+    
+    <div class="ml-2 mt-10 flex flex-wrap justify-center items-center gap-6">  
+        <% product.forEach(product => { %>
+        <div class="w-full sm:w-1/4 lg:w-1/4 xl:w-1/4 h-auto flex p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">  <!-- Individual Product Card -->
+            <div class="flex w-full flex-col items-center space-y-4">
+                <div class="bg-[<%= product.bgcolor %>] w-32 h-32 flex justify-center items-center rounded-full">
+                   <img class="w-32 h-32 rounded-full border-3 shadow-md border-yelllow-800 x" 
+                         src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" 
+                         alt="<%= product.name %> Image" 
+                         onerror="this.onerror=null; this.src='default-image.jpg';"
+                         style="box-shadow: inset 0 0 10px rgba(231, 188, 19, 0.4);">
+                       
+                </div>
+            
+                <div class="flex flex-col items-center text-center">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-left">
+                        <%=product.name %>
+                    </h1>
+            
+                    <div class="mt-4">
+                        <h2 class="font-semibold text-lg">Price</h2>
+                        <p class="text-green-600 text-xl font-bold">
+                            &#8377; <%= product.price %>
+
+                        </p>
+                        
+                        <a class=" w-7 h-7 rounded-full bg-white  text-xl font-semibold no-underline" href="/item/<%= product._id %>">View Product</a>
+
+                        
+                    </div>
+                    <div class="mt-4">
+                        <p class="bg-orange-300 text-xl font-bold">
+                            <a class="w-7 h-7 rounded-full bg-white"  href="/addtocart/<%=product._id%>">
+                                <button class="bg-orange-300 text-white rounded-lg shadow-md w-full sm:w-40 font-mono">Add to Cart</button>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+
+</body>
+</html>

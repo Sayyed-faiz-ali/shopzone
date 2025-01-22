@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body >
+
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="/images/shop.jpg" alt="Logo" class="w-16 h-16 rounded-full">
+                <h1 class="text-xl font-bold ml-2">ShopZone</h1>
+            </div>
+            
+            <button id="mobile-menu-button" class="block md:hidden text-white" aria-label="Toggle mobile menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <div id="nav-links" class="hidden md:flex space-x-8">
+                <a href="/owner/admin" class="text-white hover:text-gray-400">Home</a>
+                <a href="/owner/product" class="text-white hover:text-gray-400">Product</a>
+                <a href="/owner/admin" class="text-white hover:text-gray-400">Add Product</a>
+                <div class="relative">
+                    <button class="text-white hover:text-gray-400">
+                        Product List
+                    </button>
+                    <div class="absolute hidden bg-gray-800 text-white border rounded-lg shadow-lg top-full left-0 mt-2">
+                        <a href="/owner/Men" class="block px-4 py-2 hover:bg-gray-700">Men</a>
+                        <a href="/owner/Women" class="block px-4 py-2 hover:bg-gray-700">Women</a>
+                        <a href="/owner/Accessories" class="block px-4 py-2 hover:bg-gray-700">Accessories</a>
+                    </div>
+                    <a href="/owner/user">Users</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="md:hidden hidden bg-gray-800 text-white p-4">
+        <a href="/owner/admin" class="block py-2">Home</a>
+        <a href="/owner/product" class="block py-2">Product</a>
+        <a href="#" class="block py-2">Add Product</a>
+        <a href="/owner/Men" class="block py-2">Men</a>
+        <a href="/owner/Women" class="block py-2">Women</a>
+        <a href="/owner/Accessories" class="block py-2">Accessories</a>
+        <a href="/owner/user">Users</a>
+    </div>
+    
+    <div class="bg-zinc-100  shadow-lg rounded-lg p-8 m-auto mt-36 max-w-lg  w-full">
+        <div class="flex justify-center items-center  mb-4">
+            <div class="w-20 h-20 bg-gray-300 rounded-full">
+                <img src=" /images/uploads/total.png" alt="" class="rounded-full">
+            </div>
+        </div>
+        <% user.forEach((i)=>{%>
+
+            <div class="text-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">
+                    <%=i.fullname%>
+                    </h2>
+                    
+                    <p class="text-sm text-gray-600">
+                    <%=i.email%></p>
+    
+            </div>
+            <%}) %>
+    </div>
+
+</body>
+<script>
+    // Toggle mobile menu visibility
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    const productListDropdown = document.querySelector('.relative > button');
+    const dropdownMenu = document.querySelector('.relative > div');
+
+    // Toggle mobile menu
+    mobileMenuButton.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Show dropdown on hover for "Product List"
+    productListDropdown.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('hidden');
+    });
+</script>
+</html>

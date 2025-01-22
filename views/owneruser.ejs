@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+
+
+
+    <!-- <div class="flex h-screen"> -->
+        <!-- <div class="bg-gray-800 w-64 text-white p-4">
+            <div class="flex items-center mb-4">
+                <img src="/images/shop.jpg" alt="Logo" class="w-12 h-12 rounded-full">
+                <h1 class="text-xl font-bold ml-2">ShopZone</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="/owner/admin" class="block py-2 px-4 hover:bg-gray-700">Home</a></li>
+                    <li class="mb-2"><a href="/owner/product" class="block py-2 px-4 hover:bg-gray-700">Product</a></li>
+                    <li class="mb-2"><a href="/owner/admin" class="block py-2 px-4 hover:bg-gray-700">Add Product</a></li>
+                    <li class="mb-2">
+                    <details>
+                        <summary>Product List</summary>
+                        <a href="/owner/Men">Men</a>
+                        <a href="/owner/Women">Women</a>
+                        <a href="/owner/Accessories">Accessories</a>
+                    </details>
+                    </li>
+                    </ul>
+            </nav>
+            </div> -->
+    
+            <nav class="bg-gray-800 text-white p-4">
+                <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+                    <div class="flex items-center">
+                        <img src="/images/shop.jpg" alt="Logo" class="w-16 h-16 rounded-full">
+                        <h1 class="text-xl font-bold ml-2">ShopZone</h1>
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="block md:hidden text-white" aria-label="Toggle mobile menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+        
+                    <div id="nav-links" class="hidden md:flex space-x-8">
+                        <a href="/owner/admin" class="text-white hover:text-gray-400">Home</a>
+                        <a href="/owner/product" class="text-white hover:text-gray-400">Product</a>
+                        <a href="#" class="text-white hover:text-gray-400">Add Product</a>
+                        <div class="relative">
+                            <button class="text-white hover:text-gray-400">
+                                Product List
+                            </button>
+                            <div class="absolute hidden bg-gray-800 text-white border rounded-lg shadow-lg top-full left-0 mt-2">
+                                <a href="/owner/Men" class="block px-4 py-2 hover:bg-gray-700">Men</a>
+                                <a href="/owner/Women" class="block px-4 py-2 hover:bg-gray-700">Women</a>
+                                <a href="/owner/Accessories" class="block px-4 py-2 hover:bg-gray-700">Accessories</a>
+                            </div>
+                        </div>
+                        <a href="/owner/user">Users</a>
+                    </div>
+                </div>
+            </nav>
+        
+            <div id="mobile-menu" class="md:hidden hidden bg-gray-800 text-white p-4">
+                <a href="/owner/admin" class="block py-2">Home</a>
+                <a href="/owner/admin" class="block py-2">Add Product</a>
+                <a href="/owner/product" class="block py-2">Product</a>
+                <a href="/owner/Men" class="block py-2">Men</a>
+                <a href="/owner/Women" class="block py-2">Women</a>
+                <a href="/owner/Accessories" class="block py-2">Accessories</a>
+                <a href="/owner/user">Users</a>
+            </div>
+    
+            <div class="container mx-auto p-6">
+
+        <h1 class="text-3xl font-semibold text-center mb-6">List of Users</h1>
+        
+        <% if (user && user.length > 0) { %>
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto bg-white shadow-lg rounded-lg">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <!-- <th class="px-6 py-3 text-left text-sm font-medium">ID</th> -->
+                            <th class="px-6 py-3 text-left text-sm font-medium">Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Email</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">product add to cart</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% user.forEach(function(u) { %>
+                            <tr class="border-b hover:bg-gray-100">
+                                <!-- <td class="px-6 py-4 text-sm text-gray-800"><%= u._id %></td> -->
+                                <td class="px-6 py-4 text-sm text-gray-800"><%= u.fullname %></td>
+                                <td class="px-6 py-4 text-sm text-gray-800"><%= u.email %></td>
+                                <td class="px-6 py-4 text-sm text-gray-800"><%= u.cart.length %></td>
+
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <p class="text-center text-lg text-gray-600">No users found.</p>
+        <% } %>
+
+    </div>
+
+
+
+
+    <h1 class="text-3xl font-semibold text-center mb-6">List of address</h1>
+    <div class="flex flex-wrap items-center mt-6 space-y-4">
+        <% add.forEach(function(i) { %>
+            <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-300">
+                <h1 class="text-center text-green-600 text-xl font-semibold bg-gradient-to-r from-green-200 via-green-300 to-green-500 py-2 rounded-lg">Successfully Done</h1>
+                <div class="mt-4">
+                    <p class="font-medium text-gray-700">Name: <span class="text-gray-900"><%= i.fullname %></span></p>
+                    <p class="font-medium text-gray-700">Email: <span class="text-gray-900"><%= i.email %></span></p>
+                    <p class="font-medium text-gray-700">Number: <span class="text-gray-900"><%= i.contactno %></span></p>
+                    <p class="font-medium text-gray-700">Address: <span class="text-gray-900"><%= i.address %></span></p>
+                    <p class="font-medium text-gray-700">Location: <span class="text-gray-900"><%= i.location %></span></p>
+                </div>
+                <hr class="my-4 border-gray-300">
+            </div>
+        <% }) %>
+    </div>
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const productListDropdown = document.querySelector('.relative > button');
+        const dropdownMenu = document.querySelector('.relative > div');
+
+        mobileMenuButton.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        productListDropdown.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
