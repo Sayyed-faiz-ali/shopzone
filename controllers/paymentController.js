@@ -36,7 +36,7 @@ const payProduct = async (req, res) => {
         
         
         const items = [{
-            name: product.name || 'Unnamed Product',  // Ensure title is not undefined
+            name: product.name || 'Unnamed Product',  
             sku: product._id.toString(),
             price: product.price.toFixed(2),
             currency: "USD",

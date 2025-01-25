@@ -148,7 +148,7 @@ router.post("/update",isLogged,upload.single("image"),async function(req,res){
    
     //  res.render("profile",{user})
     res.redirect("/profile")
-    console.log(user);
+   
     
     
 })
