@@ -10,8 +10,7 @@ const indexRouter=require('./routes/index');
 const paymentRoute = require('./routes/paymentRoute');
 
 const jwt =require("jsonwebtoken");
-// const flash = require("connect-flash");
-// const expressSession=require("express-session");
+
 
 require("dotenv").config();
 
@@ -21,18 +20,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use(cookieParser());
-// app.use(
-//     expressSession({
-//         resave:false,
-//         saveUninitialized:false,
-//         secret:"xyzsss",
-//     })
-// );
 
 
 
 
-// app.use(flash());
 app.use(express.urlencoded({extended:true}));
 
 app.use("/user",userRouter);
