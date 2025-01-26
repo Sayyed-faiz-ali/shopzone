@@ -172,7 +172,7 @@ router.get("/item/:productid", isLogged, async function(req, res) {
             return res.status(404).send("Product not found");
         }
 
-        res.render("ITEM", { product: productDetails });
+        res.render("item", { product: productDetails });
     } catch (err) {
         console.error("Error fetching product:", err.message);
         res.status(500).send("Internal server error");
