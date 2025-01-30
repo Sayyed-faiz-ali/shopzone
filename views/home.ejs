@@ -49,8 +49,13 @@
                         
                       </form>
                         
-                          <a href="/cart" class="text-blue-600"><i title="<%=user.cart.length%>" class="fa fa-shopping-cart fa-1x "><sup class="text-red-800  font-mono"><%=user.cart.length%></sup></i>
-                          </a>
+                          <a href="/cart" class="text-blue-600">
+                        <i title="Cart items" class="fa fa-shopping-cart fa-1x">
+                            <sup class="text-red-800 font-mono">
+                                <%= user.cart ? user.cart.length : 0 %>
+                            </sup>
+                        </i>
+                    </a>
 
                   
                 
