@@ -33,43 +33,28 @@ router.get("/shop",isLogged,async function(req, res) {
 
 
 
-// cart 
-
-    router.get("/cart", isLogged, async function(req, res) {
+   router.get("/cart", isLogged, async function(req, res) {
         try {
-            let user = await userModel.findOne({ email: req.user.email }).populate('cart');
-        
+            let user = await userModel.findOne({ email: req.user.email }).populate('cart.productId');
     
-    // let product = await productmodel.find();
-
-    // let existingProduct = user.cart.find(item => {
-    //                 console.log("Checking item.productId: ", item.req.productid);  // Log each item in the cart
-    //                 return item.req.productid === product;  // Compare productIds
-    //             });
-    // console.log(existingProduct);
-
             const bill = user.cart.map(item => {
-                const price = Number(item.price);
-                const discount = Number(item.discount);
+                const price = Number(item.productId.price);
+                const discount = Number(item.productId.discount);
                 const quantity = Number(item.quantity) || 1; 
                 
-                
-                const itemTotal = (price - discount) * quantity;
-                return itemTotal; 
-                
+                return (price - discount) * quantity;
             });
-
+    
             const totalBill = bill.reduce((acc, curr) => acc + curr, 0);
-
+    
             res.render("cart", { user, totalBill });
-
+    
         } catch (error) {
             console.error("Error fetching cart:", error);
             res.status(500).send("Internal Server Error");
         }
     });
-
-
+    
 
 // cart del
 router.post("/cart/delete/:itemId", isLogged, async function(req, res) {
@@ -77,23 +62,33 @@ router.post("/cart/delete/:itemId", isLogged, async function(req, res) {
         const itemId = req.params.itemId;
         const userEmail = req.user.email;
 
-        const user = await userModel.findOneAndUpdate(
-            { email: userEmail },
-            { $pull: { cart: itemId } },
-            { new: true } 
-        ).populate("cart");
+        // Find the user and check if the cart contains the item
+        const user = await userModel.findOne({ email: userEmail });
 
-        
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const itemIndex = user.cart.findIndex(item => item.productId.toString() === itemId);
+
+        if (itemIndex === -1) {
+            return res.status(404).send("Item not found in cart");
+        }
+
+        // Remove the item from the cart
+        user.cart.splice(itemIndex, 1);
+        await user.save();
+
+        // Recalculate total bill
         const bill = user.cart.map(item => {
             const price = Number(item.price);
             const discount = Number(item.discount);
             return price - discount;
-            
         });
+
         const totalBill = bill.reduce((acc, curr) => acc + curr, 0);
 
-        res.render("cart", { user,totalBill });
-       
+        res.render("cart", { user, totalBill });
 
     } catch (error) {
         console.error("Error deleting item from cart:", error);
@@ -102,19 +97,57 @@ router.post("/cart/delete/:itemId", isLogged, async function(req, res) {
 });
 
 // add to cart rout
-router.get("/addtocart/:productid",isLogged,async function(req,res){
-    let user = await userModel.findOne({email:req.user.email});
-   
-    if (!user) return res.status(401).send("Invalid email or password");
-      user.cart.push(req.params.productid);
+router.get("/addtocart/:productid", isLogged, async function(req, res) {
+    try {
+        let user = await userModel.findOne({ email: req.user.email });
 
-      
+        if (!user) return res.status(401).send("Invalid email or password");
+
+        let productId = req.params.productid;
         
-   await user.save();
-    res.redirect("/shop");
-    alert("card added suceesfully")
-   
+        // Check if the product already exists in the cart
+        let existingProduct = user.cart.find(item => item.productId.toString() === productId);
+
+        if (existingProduct) {
+            existingProduct.quantity += 1; // Increase quantity
+        } else {
+            // Add new product with quantity 1
+            user.cart.push({ productId, quantity: 1 });
+        }
+
+        await user.save();
+        res.redirect("/shop");
+    } catch (error) {
+        console.error("Error adding to cart:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
+
+router.post("/cart/update/:productId", isLogged, async (req, res) => {
+    try {
+        let user = await userModel.findOne({ email: req.user.email });
+
+        let itemIndex = user.cart.findIndex(item => item.productId.toString() === req.params.productId);
+
+        if (itemIndex > -1) {
+            if (req.body.action === "increase") {
+                user.cart[itemIndex].quantity += 1;
+            } else if (req.body.action === "decrease" && user.cart[itemIndex].quantity > 1) {
+                user.cart[itemIndex].quantity -= 1;
+            }
+        }
+
+        await user.save();
+        res.redirect("/cart");
+    } catch (error) {
+        console.error("Error updating cart:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+   
+
 
 
 
