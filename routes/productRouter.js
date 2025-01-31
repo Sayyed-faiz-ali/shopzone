@@ -8,15 +8,7 @@ const alert = require("alert-node");
 
 
 
-// router.get("/shop", async function(req, res) {
-//     try {
-//         let product = await productmodel.find();
-//         res.render("shop", { product });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send("An error occurred while retrieving products.");
-//     }
-// });
+
 
 
 router.post("/shop/create",upload.single("image"),async  function(req,res){
@@ -36,15 +28,6 @@ try{
         textcolor,
 })
 
-// if(category === 'Men') {
-//     res.redirect('/men');
-//   } else if (category === 'Women') {
-//     res.redirect('/women');
-//   } else if (category === 'Accessories') {
-//     res.redirect('/accessories');
-//   } else {
-//     res.status(400).send('Invalid category');
-//   }
   alert("sucessfully added ")
 res.redirect("/owner/admin") 
  
