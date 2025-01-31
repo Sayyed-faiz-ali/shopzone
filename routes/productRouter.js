@@ -61,7 +61,7 @@ router.get("/Women", islogged ,async function(req,res) {
     try{
        let product = await productmodel.find({category:'Women'});
           
-   res.render("Women",{product});
+   res.render("women",{product});
    }
    catch(err){
        console.log(err)
