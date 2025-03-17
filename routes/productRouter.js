@@ -57,7 +57,7 @@ catch(err){
 }
 });
 
-router.get("/women", islogged ,async function(req,res) {
+router.get("/Women", islogged ,async function(req,res) {
     try{
        let product = await productmodel.find({category:'Women'});
           
