@@ -40,8 +40,14 @@ SZone is a modern and responsive e-commerce web application that provides a seam
 ## 📷 Screenshots
 
 > _(Add screenshots if available — home page, product page, cart, etc.)_
-> [Screenshot - SZone Homepage](https://github.com/Sayyed-faiz-ali/shopzone/blob/main/s1.png)
+> SZone Homepage
 > ![Screenshot - SZone Homepage](https://github.com/Sayyed-faiz-ali/shopzone/blob/main/s1.png?raw=true)
+> SZone Productpage
+> ![Screenshot - SZone Homepage](https://github.com/Sayyed-faiz-ali/shopzone/blob/main/s2.png?raw=true)
+>SZone Categorypage
+> [Screenshot - SZone Categorypage](https://github.com/Sayyed-faiz-ali/shopzone/blob/main/s3.png?raw=true)
+
+
 
 
 ---
